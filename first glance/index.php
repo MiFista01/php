@@ -19,8 +19,6 @@ if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
     echo "PersonID: " . $row["PersonID"]. "/ Name: " . $row["FirstName"]."/ LastName: " . $row["LastName"]."/ Address: " . $row["Address"]. "/ City: " . $row["City"]."<br>";
   }
-} else {
-  echo "0 results";
 }
 $games_array = ['name'=>"Noita"];
 
@@ -35,10 +33,13 @@ $create_table = "CREATE TABLE games(
 )";
    
 
-$query = mysqli_query($conn,"CHECK TABLE games");
+$query = mysqli_query($conn,"SHOW TABLES FROM `mifista` like 'persons'");
 $result = mysqli_fetch_array($query);
+$count = 0;
 foreach($result as $key){
-    echo $key."<br>";
+  $count ++;
+  echo $key."<br>";
+  echo $count;
 }
 $conn->close();
 ?>
