@@ -1,11 +1,13 @@
--- CREATE TABLE persons(
---     PersonID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
---     FirstName NVARCHAR(500),
---     LastName NVARCHAR(500),
---     Address NVARCHAR(500),
---     City NVARCHAR(500)
--- )
--- INSERT INTO persons (FirstName, LastName, Address, City)
--- VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger');
+CREATE TABLE games(
+    ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name NVARCHAR(500),
+    genres NVARCHAR(500),
+    description NVARCHAR(500),
+    developer NVARCHAR(500),
+    poster NVARCHAR(500),
+    anchor NVARCHAR(500)
+);
+INSERT INTO games (name, genres, description,developer,poster,anchor) 
+VALUES ("$name",'$genres','$des',"$dev","$poster","$anchor");
 INSERT INTO persons(FirstName,LastName,Address,City) 
 VALUES ("Dima","Kreivald","no information","Narva");

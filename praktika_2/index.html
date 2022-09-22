@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8">
+ <title>Пример отправки формы</title>
+<script src="jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="aaa.js"></script>
+<style type="text/css">
+#msg {
+ padding-top: 5px;
+ color: red;
+}
+</style>
+</head>
+<body>
+ <form id="form">
+   <div>
+     <label for="username">username</label><br>
+     <input type="text" name="username" style="margin-bottom: 10px;">
+   </div>
+   <div>
+    <label for="age">age</label><br>
+    <input type="text" name="age" style="margin-bottom: 10px;">
+   </div>
+   <label for="profession">profession</label><br>
+    <select name="profession" id="">
+        <option value="id">id_name</option>
+    </select>
+    <br>
+   <div><input type="submit" value="Отправить"></div>
+ </form>
+ <div id="msg"></div>
+</body>
+</html>
