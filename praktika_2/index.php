@@ -12,7 +12,7 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$conn->close();
+
     if(empty($_POST['username']) || empty($_POST['age'])){
         echo 'ada';
     }else{
@@ -22,4 +22,5 @@ $conn->close();
             echo $key;
         }
 }
+$conn->close();
 ?>
