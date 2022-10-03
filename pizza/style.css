@@ -14,20 +14,102 @@ header{
 form{
     width: 50%;
 }
-input{
-    width: 100%;
-    height: 2vh;
-}
 .form-group{
     margin: 10px;
 }
-select{
-    height: 2vh;
+.select_kind{
+    width: 33%;
+}
+input{
+    width: 100%;
+    height: 4vh;
+}
+#get_select{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.order{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 48%;
+    margin-top: 10px;
+    border: 1px solid black;
+    
+}
+.order_header{
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    flex-direction: row;
+    width: 98%;
+    margin: 5px;
+}
+.order img{
+    width: 5%;
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+.order img:hover{
+    width: 6%;
+}
+.order input {
+    margin: 5px;
+    width: 90%;
+    border: none;
+}
+.order input:focus{
+    border:  none;
+    outline: none;
+    outline-offset: 0;
+}
+#text{
+    user-select: none;
+    cursor: default;
+    text-align: center;
+}
+.order textarea{
+    border: 1px solid black;
+    width: 95%;
+    margin: 5px;
+}
+.order textarea:focus{
+    border: 1px solid black;
+    outline: 0;
+}
+.select_kind select{
+    height: 4vh;
+    width: 100%;
+    margin-bottom: 5px;
 }
 textarea{
     resize: none;
     width: 100%;
     height: 10vh;
+}
+#result{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+}
+#orders{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#orders div{
+    border: 1px solid black;
+    margin: 10px;
+}
+#result div{
+    margin: 20px;
 }
 footer{
     width: 100%;

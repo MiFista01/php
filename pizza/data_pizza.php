@@ -14,5 +14,4 @@ $data_pizza = array(array("name"=>"BIG Pizza",
                     array("name"=>"Pizza with meat",
                         "prise"=>5.41,
                         "anchor"=>"meat"));
-echo json_encode($data_pizza)
 ?>

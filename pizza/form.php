@@ -1,17 +1,10 @@
 <?php
-
-$status = 0;
-if($_POST["name"] != "" && 
-$_POST["adress"] != "" && 
-$_POST["phone"] != "" && 
-$_POST["adress"] != "" && 
-$_POST["email"] != "" && 
-$_POST["kind"] != "" && 
-$_POST["count"] != ""){
-    $status = 1;
+session_start();
+$_SESSION["order"] = $_POST;
+if (isset($_POST["name"]) && isset($_POST["adress"]) && isset($_POST["phone"]) && isset($_POST["email"]) && filter_var($_POST["email"],FILTER_VALIDATE_EMAIL)){
+    echo json_encode(array(1,$_POST));
 }else{
-    $status = 0;
+    echo json_encode(array(0));
 }
 
-echo $status;
 ?>
