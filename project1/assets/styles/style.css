@@ -1,0 +1,231 @@
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(0, 0, 100);
+    color: whitesmoke;
+}
+header a{
+    color: whitesmoke;
+    text-decoration: none;
+}
+header h1{
+    width: 35%;
+    margin-top: -2vh;
+}
+header div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5vh;
+    width: 35%;
+    
+}
+main{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: baseline;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 70vh;
+}
+main h2{
+    width: 100%;
+    text-align: center;
+}
+main .text{
+    width: 30%;
+    margin-right: 5%;
+}
+main img{
+    width: 30%;
+}
+.categories{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    user-select: none;
+}
+.categories p{
+    width: 10%;
+    margin: 2%;
+    text-align: center;
+}
+.categories p {
+    cursor: pointer;
+}
+.row_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 80vw;
+}
+.row_header h4{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    width: calc(80vw/6);
+}
+.table{
+    width: 80vw;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    width: 80vw;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    background-color: whitesmoke;
+}
+.cell{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: calc(80vw/5);
+    flex-grow: 1;
+}
+.cell p{
+    width: calc(80vw/6);
+    text-align: center;
+}
+.button{
+    cursor: pointer;
+    user-select: none;
+}
+.count{
+    width: 60vw;
+    text-align: end;
+}
+.content{
+    width: calc(80vw/7*5.8);
+    
+}
+.contents_row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+.contents_row .cell{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: calc(80vw/6);
+}
+.contents_row button{
+    width: 40%;
+    height: 80%;
+    cursor: pointer;
+}
+.content .edit{
+    background-color: green;
+    font-weight: bolder;
+    color: whitesmoke;
+    border: none;
+    transition-duration: 0.2s;
+}
+.content .edit:hover{
+    background-color: rgb(8, 221, 8);
+}
+.content .delet{
+    background-color: rgb(167, 1, 1);
+    font-weight: bolder;
+    color: whitesmoke;
+    border: none;
+    transition-duration: 0.2s;
+}
+.content .delet:hover{
+    background-color: rgb(255, 0, 0);
+}
+.add_from_continents{
+    margin: 20px;
+}
+.add_from_continents .row_form{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    width: 80vw;
+    height: 5vh;
+}
+.add_from_continents .row_form input{
+    width: calc(80vw/6.4);
+    text-align: center;
+    height: 5vh;
+}
+.add_from_continents .row_form button{
+    width: calc(80vw/6.1);
+    height: 6vh;
+}
+.add_from_continents .row_form select{
+    width: calc(80vw/6.1);
+    text-align: center;
+    height: 6vh;
+}
+.update_continents{
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+.update_continents .row_form{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    height: 5vh;
+    margin-right: calc(80vw/6);
+}
+.update_continents .row_form input{
+    width: calc(80vw/6.4);
+    text-align: center;
+    height: 5vh;
+}
+.update_continents .row_form button{
+    width: calc(80vw/6.1);
+    text-align: center;
+    height: 6vh;
+
+}
+.update_continents .row_form select{
+    width: calc(80vw/6.1);
+    text-align: center;
+    height: 6vh;
+}
+footer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: rgb(0, 0, 100);
+    color: whitesmoke;
+    height: 10vh;
+}
