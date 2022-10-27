@@ -72,28 +72,30 @@ main img{
 .categories p {
     cursor: pointer;
 }
+
+.table{
+    width: 95vw;
+}
 .row_header{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    width: 80vw;
+    width: 100%;
 }
 .row_header h4{
     text-align: center;
     margin: 0;
     padding: 0;
-    width: calc(80vw/6);
+    width: calc(80vw/7.5);
 }
-.table{
-    width: 80vw;
-}
+
 .row{
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: space-around;
     align-items: center;
-    width: 80vw;
+    width: 100%;
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
     background-color: whitesmoke;
@@ -101,122 +103,93 @@ main img{
 .cell{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
+    align-content: center;
     align-items: center;
-    width: calc(80vw/5);
-    flex-grow: 1;
+    width: calc(80vw/8);
 }
 .cell p{
-    width: calc(80vw/6);
+    width: 100%;
     text-align: center;
 }
-.button{
-    cursor: pointer;
-    user-select: none;
+.cell input{
+    width: 90%;
+    height: 5vh;
+    text-align: center;
 }
 .count{
     width: 60vw;
     text-align: end;
 }
-.content{
-    width: calc(80vw/7*5.8);
+.edit, .delet{
+    font-weight: bolder;
+    color: whitesmoke;
+    border: none;
+    transition-duration: 0.2s;
+    height: 5vh;
+    width: 45%;
+}
+.edit{
+    background-color: green;
     
 }
-.contents_row{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
-}
-.contents_row .cell{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: calc(80vw/6);
-}
-.contents_row button{
-    width: 40%;
-    height: 80%;
-    cursor: pointer;
-}
-.content .edit{
-    background-color: green;
-    font-weight: bolder;
-    color: whitesmoke;
-    border: none;
-    transition-duration: 0.2s;
-}
-.content .edit:hover{
+.edit:hover{
     background-color: rgb(8, 221, 8);
 }
-.content .delet{
+.delet{
     background-color: rgb(167, 1, 1);
-    font-weight: bolder;
-    color: whitesmoke;
-    border: none;
-    transition-duration: 0.2s;
 }
-.content .delet:hover{
+.delet:hover{
     background-color: rgb(255, 0, 0);
 }
-.add_from_continents{
-    margin: 20px;
-}
-.add_from_continents .row_form{
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-    align-items: center;
-    width: 80vw;
-    height: 5vh;
-}
-.add_from_continents .row_form input{
-    width: calc(80vw/6.4);
-    text-align: center;
-    height: 5vh;
-}
-.add_from_continents .row_form button{
-    width: calc(80vw/6.1);
-    height: 6vh;
-}
-.add_from_continents .row_form select{
-    width: calc(80vw/6.1);
-    text-align: center;
-    height: 6vh;
-}
-.update_continents{
-    margin-top: 5px;
+.update_continents, .add_form{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     width: 100%;
+    margin: 0px;
     flex-wrap: wrap;
-    margin: 20px;
 }
-.update_continents .row_form{
+.add_form{
+    margin: 10px;
+}
+.button_forms{
+    height: 7vh;
+    width: 45%;
+    text-align: center;
+}
+.add_form button{
+    width: 100%;
+    height: 5.5vh;
+}
+select{
+    height: 5.5vh;
+    text-align: center;
+    width: 100%;
+}
+#result{
+    width: 95%;
+    text-align: end;
+}
+.content{
     display: flex;
     flex-direction: row;
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
-    height: 5vh;
-    margin-right: calc(80vw/6);
-}
-.update_continents .row_form input{
-    width: calc(80vw/6.4);
-    text-align: center;
-    height: 5vh;
-}
-.update_continents .row_form button{
-    width: calc(80vw/6.1);
-    text-align: center;
-    height: 6vh;
-
-}
-.update_continents .row_form select{
-    width: calc(80vw/6.1);
-    text-align: center;
-    height: 6vh;
+    width: calc(100vw);
+    flex-wrap: wrap;
+    
+}.row_content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    background-color: whitesmoke;
 }
 footer{
     display: flex;

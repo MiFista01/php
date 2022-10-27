@@ -26,11 +26,54 @@ class Models {
        return $sql;
     }
     public static function creat($dates){
-        $sql = "INSERT INTO ".$dates["field"]." (Code, Name, Continent, IndepYear, Population) VALUES('".$dates["code"]."', '".$dates["name"]."', '".$dates["continent"]."', ".$dates["year"].", ".$dates["population"].")";
+        $sql = "INSERT INTO ".$dates["field"];
+        $tables = " (";
+        $values = " (";
+        foreach ($dates as $key => $val) {
+            if($key != "field"){
+                if($key != "HeadOfState"){
+                    $tables .= $key.", ";
+                    $values .= "'".$val."', ";
+                }
+                else{
+                    $tables .= $key.")";
+                    $values .= "'".$val."')";
+                }
+            }
+            
+        }
+        return $sql.$tables." VALUES ".$values;
+    }
+    public static function update_country($dates){
+        $sql = "UPDATE ".$dates["field"]." SET ";
+        foreach ($dates as $key => $value) {
+            if($key != "field" && $key != "code"){
+                if($key != "HeadOfState"){
+                    $sql .= $key." = '".$value."', ";
+                }else{
+                    $sql .= $key." = '".$value."' ";
+                }
+                
+            }
+            
+        }
+        $sql .= "WHERE Code LIKE '".$dates["code"]."'";
         return $sql;
     }
-    public static function update($dates){
-        $sql = "UPDATE ".$dates["field"]." SET Continent = '".$dates["continent"]."', Name = '".$dates["name"]."', Population = '".$dates["population"]."', IndepYear = '".$dates["year"]."' WHERE Code LIKE '".$dates["code"]."'";
+    public static function update_city($dates){
+        $sql = "UPDATE ".$dates["field"]." SET ";
+        foreach ($dates as $key => $value) {
+            if($key != "field" && $key != "code"){
+                if($key != "Population"){
+                    $sql .= $key." = '".$value."', ";
+                }else{
+                    $sql .= $key." = '".$value."' ";
+                }
+                
+            }
+            
+        }
+        $sql .= "WHERE ID LIKE '".$dates["code"]."'";
         return $sql;
     }
     public static function delete($dates){
