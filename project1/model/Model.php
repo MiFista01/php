@@ -3,6 +3,11 @@
  * class database из папки inc
  */
 class Models {
+    public static function check_user($dates){
+        $sql = "SELECT * FROM users WHERE name LIKE '".$dates["name"]."' AND password LIKE '".$dates["password"]."'";
+        
+       return $sql;
+    }
 	public static function get_dates($dates){
         if ($dates["distinct"] == "" && $dates["count"] == ""){
             $sql = "SELECT * FROM ".$dates["field"];
@@ -17,13 +22,26 @@ class Models {
         }
         if ($dates["where"] != ""){
             $fields = explode(",", $dates["where"]);
-            $sql .= " WHERE ".$fields[0]." LIKE '".$fields[1]."'";
+            $sql .= " WHERE ".$fields[0]." LIKE '".$fields[1]."' AND status = 0";
+            if ($dates["order"] != ""){
+                $sql .= " ORDER BY".$dates["order"];
+            }
+        }else{
+            if ($dates["order"] != ""){
+                $sql .= " WHERE status = 0 ORDER BY".$dates["order"];
+            }
         }
-        if ($dates["order"] != ""){
-            $sql .= " ORDER BY ".$dates["order"];
-        }
+       
 
        return $sql;
+    }
+    public static function all_deleted_country($dates){
+        $sql = "SELECT Name, Code FROM ".$dates['field']." WHERE status = 1";
+        return $sql;
+    }
+    public static function all_deleted_city($dates){
+        $sql = "SELECT Name, ID FROM ".$dates['field']." WHERE status = 1";
+        return $sql;
     }
     public static function creat($dates){
         $sql = "INSERT INTO ".$dates["field"];
@@ -42,6 +60,28 @@ class Models {
             }
             
         }
+        return $sql.$tables." VALUES ".$values;
+    }
+    public static function creat_city($dates){
+        $sql = "INSERT INTO ".$dates["field"];
+        $tables = " (";
+        $values = " (";
+        $keys = "";
+        foreach ($dates as $key => $val) {
+            if($key != "field"){
+                $keys .= $key;
+                if($key != "Population"){
+                    $tables .= $key.", ";
+                    $values .= "'".$val."', ";
+                }
+                else{
+                    $tables .= $key.")";
+                    $values .= "'".$val."')";
+                }
+            }
+            
+        }
+        
         return $sql.$tables." VALUES ".$values;
     }
     public static function update_country($dates){
@@ -77,9 +117,13 @@ class Models {
         return $sql;
     }
     public static function delete($dates){
-        $sql = "UPDATE ".$dates["field"]." SET Status = 1 WHERE Code LIKE '".$dates["code"]."'";
+        $sql = "UPDATE ".$dates["field"]." SET status = 1 WHERE ".array_keys($dates)[1]." LIKE '".$dates[array_keys($dates)[1]]."'";
         return $sql;
     }
-	
+	public static function reestablish($dates)
+    {
+        $sql = "UPDATE ".$dates["field"]." SET status = 0 WHERE ".array_keys($dates)[1]." LIKE '".$dates[array_keys($dates)[1]]."'";
+        return $sql;
+    }
 }//END CLASS
 ?>

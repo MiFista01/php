@@ -17,6 +17,10 @@ class Controller {
       include_once "view/cities.php";
       return;
    }
+   public static function Deleted_all(){
+      include_once "view/deleted_all.php";
+      return;
+   }
    
    public static function error404(){
     include_once "view/error404.php";

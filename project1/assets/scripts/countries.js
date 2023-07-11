@@ -1,15 +1,45 @@
 // var cells = ["Code","Country","Continent","Region","IndepYear","Population","GovernmentForm","HeadOfState"];
 var continents = ["Asia","Europe","North America","Africa","Oceania","Antarctica","South America"]
+let user = false;
 $(document).ready(function () {
+    $.ajax({
+        type: "post",
+        url: "../configs/user.php",
+        dataType: "html",
+        success: function (response) {
+            if(response != ""){
+                let result = `<div class='user'>
+                <img src='../assets/imgs/user.png'>
+                <p>`+response+`</p>
+                <form class="logOut">
+                    <button>logOut</button>
+                </form>
+                </div>`
+                $(result).insertAfter(".user_form");
+                $(".user_form").remove();
+                user = true
+                $(".logOut").submit(function (e) { 
+                    $.ajax({
+                        type: "post",
+                        url: "../configs/logOut.php",
+                        dataType: "html",
+                        success: function (response) {
+                            
+                        }
+                    });
+                });
+            }
+        }
+    });
     $.ajax({
         type: "post",
         url: "../configs/connect.php",
         data: {status:2, query:{field:"country", where:"", order:" Name ASC", distinct:"", count:""}}, //получение всех стран
         dataType: "html",
         success: function (response) {
+            console.log(response)
             let dates = JSON.parse(response)
             $("#count").text(dates.length);
-            $(".rows").html("");
             dates.forEach(element => {
                 if(element.status == 0){
                     let row = document.createElement("div");
@@ -64,6 +94,13 @@ $(document).ready(function () {
                     });
                     cell_button.appendChild(edit)
                     cell_button.appendChild(delet)
+                    if (user == true){
+                        $(delet).show();
+                        $(edit).show();
+                    }else{
+                        $(delet).hide();
+                        $(edit).hide();
+                    }
                     row.appendChild(cell_button)
                     $(".table").append(row);
                 }
@@ -179,6 +216,9 @@ function creat_updatetable(element,e){
 }
 function creat_addtable(dates){
     let form = document.createElement("Form");
+    if(user == false){
+        $(form).hide();
+    }
     form.className = "add_form";
     for(let i of Object.keys(dates[0])){
         if(i != "status" && i != "Code2"){
@@ -255,6 +295,11 @@ function creat_addtable(dates){
                         
                         cell.appendChild(text);
                         row.appendChild(cell);
+                        for(let i of form){
+                            if(i.name != ""){
+                                i.value = ""
+                            }
+                        }
                     });
                     let cell_button = document.createElement("div");
                     cell_button.className = "cell";

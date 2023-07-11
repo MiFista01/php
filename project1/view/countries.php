@@ -5,7 +5,7 @@ ob_start();
 <main>
     <h2>СПИСОК СТРАН</h2>
     <div class="table">
-        <div class="row_header">
+        <div class="row_header" id="row_header">
             <h4>Code</h4>
             <h4>Country name</h4>
             <h4>Continent</h4>

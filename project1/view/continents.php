@@ -6,7 +6,7 @@ ob_start();
     <h2>СПИСОК СТРАН ПО КОНТИНЕНТАМ</h2>
     <div class="categories"><p id="all">All</p></div>
     <div class="table">
-        <div class="row_header">
+    <div class="row_header" id="row_header">
             <h4>Continent</h4>
             <h4>Code</h4>
             <h4>Country name</h4>
@@ -21,7 +21,9 @@ ob_start();
     <p class="count">Total continents: <span id="count"></span></p>
 </main>
 <script src="../assets/scripts/continents.js"></script>
-
+<form class="logOut">
+    <button>logOut</button>
+</form>
 <?php
 $content = ob_get_clean();
 include("view/templates/layout.php");

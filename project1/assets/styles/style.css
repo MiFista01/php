@@ -31,9 +31,43 @@ header div{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: 5vh;
-    width: 35%;
+    margin-top: 2vh;
+    width:40%;
+    flex-wrap: wrap;
     
+}
+.search{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+}
+.search input{
+    width: 40%;
+}
+.user_form{
+    margin-left: 3vw;
+    margin-bottom: 15px;
+}
+.user_form p{
+    margin: 0;
+    padding: 0;
+}
+.user{
+    max-width: 5vw;
+    margin-left: 3vw;
+}
+.user img{
+    width: 5vw;
+}
+.user p{
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+.user button{
+    width: 5vw;
 }
 main{
     display: flex;
@@ -88,6 +122,7 @@ main img{
     margin: 0;
     padding: 0;
     width: calc(80vw/7.5);
+    flex-grow: 1;
 }
 
 .row{
@@ -107,10 +142,12 @@ main img{
     align-content: center;
     align-items: center;
     width: calc(80vw/8);
+    flex-grow: 1;
 }
 .cell p{
     width: 100%;
     text-align: center;
+    flex-grow: 1;
 }
 .cell input{
     width: 90%;
@@ -190,6 +227,18 @@ select{
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
     background-color: whitesmoke;
+}
+.reestablish{
+    background-color: rgb(170, 244, 59);
+    border: none;
+    width: 30%;
+    height: 5vh;
+    color: whitesmoke;
+    font-weight: bold;
+    transition-duration: 0.5s;
+}
+.reestablish:hover{
+    background-color: rgb(115, 255, 0);
 }
 footer{
     display: flex;

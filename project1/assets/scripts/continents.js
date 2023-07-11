@@ -1,5 +1,31 @@
 let categories
+let user = false;
 $(document).ready(function () {
+    $.ajax({
+        type: "post",
+        url: "../configs/user.php",
+        dataType: "html",
+        success: function (response) {
+            if(response != ""){
+                let result = `<div class='user'>
+                <img src='../assets/imgs/user.png'>
+                <p>`+response+`</p>
+                <form class="logOut">
+                    <button>logOut</button>
+                </form>
+                </div>`
+                $(result).insertAfter(".user_form");
+                $(".user_form").remove();
+                user = true;
+            }
+        }
+    });
+    $("#all").click(function (e) { 
+        e.preventDefault();
+        for( let i of $(".table").children()){
+            $(i).show();
+        }
+    });
     $.ajax({
         type: "post",
         url: "../configs/connect.php",
@@ -15,6 +41,14 @@ $(document).ready(function () {
                 text.textContent = element.Continent
                 $(text).click(function (e) { 
                     e.preventDefault();
+                    for( let i of $(".table").children()){
+                        if (i.id != e.target.id.replace("_"," ") && i.id !=""){
+                            $(i).hide();
+                        }else{
+                            $(i).show();
+                        }
+                        
+                    }
                 });
                 $(".categories").append(text);
                 count += 1
@@ -59,41 +93,48 @@ function creat_row_from_category(continent){
                         }
                     }
                     let cell_button = document.createElement("div");
-                        cell_button.className = "cell";
-                        cell_button.id = "buttons"
-                        let edit = document.createElement("button");
-                        edit.textContent = "Edit";
-                        edit.className = "edit"
-                        edit.id = i.Code;
-                        $(edit).click(function (e) { 
-                            e.preventDefault();
-                            let row = $($(e.target).parentsUntil(".row")[1]).children();
-                            creat_updatetable(row,e)
-                            
-                        });
-                        let delet = document.createElement("button");
-                        delet.textContent = "Delete";
-                        delet.className = "delet"
-                        delet.id = i.Code;
-                        $(delet).click(function (e) { 
-                            e.preventDefault();
-                            $.ajax({
-                                type: "post",
-                                url: "../configs/connect.php",
-                                data: {status:5, form:{field:"country",code: e.target.id}},
-                                dataType: "html",
-                                success: function (response) {
-                                    if(response == 1){
-                                        let row = $($(e.target).parentsUntil(".table")[1]).children();
-                                        $(row.prevObject).remove();
-                                    }else{
-                                    }
+                    cell_button.className = "cell";
+                    cell_button.id = "buttons"
+                    let edit = document.createElement("button");
+                    edit.textContent = "Edit";
+                    edit.className = "edit"
+                    edit.id = i.Code;
+                    $(edit).click(function (e) { 
+                        e.preventDefault();
+                        let row = $($(e.target).parentsUntil(".row")[1]).children();
+                        creat_updatetable(row,e)
+                        
+                    });
+                    let delet = document.createElement("button");
+                    delet.textContent = "Delete";
+                    delet.className = "delet"
+                    delet.id = i.Code;
+                    $(delet).click(function (e) { 
+                        e.preventDefault();
+                        $.ajax({
+                            type: "post",
+                            url: "../configs/connect.php",
+                            data: {status:5, form:{field:"country",code: e.target.id}},
+                            dataType: "html",
+                            success: function (response) {
+                                if(response == 1){
+                                    let row = $($(e.target).parentsUntil(".table")[1]).children();
+                                    $(row.prevObject).remove();
+                                }else{
                                 }
-                            });
+                            }
                         });
-                        cell_button.appendChild(edit)
-                        cell_button.appendChild(delet)
-                        row_content.appendChild(cell_button)
+                    });
+                    cell_button.appendChild(edit)
+                    cell_button.appendChild(delet)
+                    if (user == true){
+                        $(delet).show();
+                        $(edit).show();
+                    }else{
+                        $(delet).hide();
+                        $(edit).hide();
+                    }
+                    row_content.appendChild(cell_button)
                     content.appendChild(row_content)
                 }
                 }

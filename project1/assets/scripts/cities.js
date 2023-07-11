@@ -1,4 +1,24 @@
+let user = false;
 $(document).ready(function () {
+    $.ajax({
+        type: "post",
+        url: "../configs/user.php",
+        dataType: "html",
+        success: function (response) {
+            if(response != ""){
+                let result = `<div class='user'>
+                <img src='../assets/imgs/user.png'>
+                <p>`+response+`</p>
+                <form class="logOut">
+                    <button>logOut</button>
+                </form>
+                </div>`
+                $(result).insertAfter(".user_form");
+                $(".user_form").remove();
+                user = true
+            }
+        }
+    });
     $.ajax({
         type: "post",
         url: "../configs/connect.php",
@@ -14,6 +34,47 @@ $(document).ready(function () {
                 $("#continents_list").append(option);
             });
         }
+    });
+    $.ajax({
+        type: "post",
+        url: "../configs/connect.php",
+        data: {status:2, query:{field:"country", where:"", order:" Continent ASC", distinct:"", count:""}},//получение уникальных значений
+        dataType: "html",
+        success: function (response) {
+            let data = JSON.parse(response);
+            for(let i of data){
+                let option = document.createElement("option");
+                option.value = i.Code;
+                option.text = i.Code
+                $("#countryCode").append(option);
+            }
+        }
+    });
+    $(".add_form").submit(function (e) { 
+        e.preventDefault();
+        let datas = new Map()
+        datas.set("field","city")
+        for(let i of e.target){
+            if(i.name != ""){
+                datas.set(i.name,i.value)
+            }
+        }
+        $.ajax({
+            type: "post",
+            url: "../configs/connect.php",
+            data: {status: 8, dates: Object.fromEntries(datas)},
+            dataType: "html",
+            success: function (response) {
+                if(response == 1){
+                    for(let i of e.target){
+                        if(i.name != ""){
+                            i.value = ""
+                        }
+                    }
+                }
+            }
+        });
+        
     });
     $("#continents_list").change(function (e) { 
         $.ajax({
@@ -31,11 +92,12 @@ $(document).ready(function () {
                 option.selected = true
                 $("#countries_list").append(option);
                 for( let i of data){
-                    let option = document.createElement("option")
+                    if(i.status != 1){
+                        let option = document.createElement("option")
                     option.value = i.Code;
                     option.text = i.Name;
                     $("#countries_list").append(option);
-
+                    }
                 }
             }
         });
@@ -50,7 +112,7 @@ $(document).ready(function () {
                 let data = JSON.parse(response)
                 $(".table").empty();
                 $("#count").text(data.length);
-                $(".table").html(`<div class="row_header">
+                $(".table").html(`<div class="row_header" id="row_header">
                 <h4>Name</h4>
                 <h4>Country Code</h4>
                 <h4>population</h4>
@@ -59,16 +121,17 @@ $(document).ready(function () {
                 for (let i of data){
                     let row = document.createElement("div")
                     row.className = "row"
-                    row.id = i.ID
                     Object.keys(i).forEach(element => {
-                        if(element != "ID"){
-                            let cell = document.createElement("div")
-                            cell.className = "cell";
-                            cell.id = element
-                            let text = document.createElement("div")
-                            text.textContent = i[element]
-                            cell.appendChild(text)
-                            row.appendChild(cell)
+                        if(element !="status"){
+                            if(element != "ID"){
+                                let cell = document.createElement("div")
+                                cell.className = "cell";
+                                cell.id = element
+                                let text = document.createElement("p")
+                                text.textContent = i[element]
+                                cell.appendChild(text)
+                                row.appendChild(cell)
+                            }
                         }
                     });
                     let cell_button = document.createElement("div");
@@ -77,7 +140,7 @@ $(document).ready(function () {
                         let edit = document.createElement("button");
                         edit.textContent = "Edit";
                         edit.className = "edit"
-                        edit.id = i.CountryCode;
+                        edit.id =  i.ID;
                         $(edit).click(function (e) { 
                             e.preventDefault();
                             let row = $($(e.target).parentsUntil(".table")[1]).children();
@@ -87,15 +150,16 @@ $(document).ready(function () {
                         let delet = document.createElement("button");
                         delet.textContent = "Delete";
                         delet.className = "delet"
-                        delet.id = i.CountryCode;
-                        $(delet).click(function (e) { 
+                        delet.id =  i.ID;
+                        $(delet).click(function (e) {
                             e.preventDefault();
                             $.ajax({
                                 type: "post",
                                 url: "../configs/connect.php",
-                                data: {status:5, form:{field:"country",code: e.target.id}},
+                                data: {status:5, form:{field:"city",id: e.target.id}},
                                 dataType: "html",
                                 success: function (response) {
+                                    console.log(response)
                                     if(response == 1){
                                         let row = $($(e.target).parentsUntil(".table")[1]).children();
                                         $(row.prevObject).remove();
@@ -103,6 +167,13 @@ $(document).ready(function () {
                                 }
                             });
                         });
+                        if (user == true){
+                            $(delet).show();
+                            $(edit).show();
+                        }else{
+                            $(delet).hide();
+                            $(edit).hide();
+                        }
                         cell_button.appendChild(edit)
                         cell_button.appendChild(delet)
                         row.appendChild(cell_button)
@@ -209,7 +280,6 @@ function creat_updatetable(element,e){
                             
                         }
                     }else{
-                        console.log(response)
                         $(e.target).children()[4].textContent = "Result: Fail";
                     }
                 }

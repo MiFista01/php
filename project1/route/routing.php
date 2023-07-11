@@ -28,6 +28,8 @@ elseif ($route == "continent"){
 }
 elseif ($route == "cities"){
 	Controller::Cities();
+}elseif ($route == "deleted"){
+	Controller::Deleted_all();
 }
 else{
 	Controller::error404();
